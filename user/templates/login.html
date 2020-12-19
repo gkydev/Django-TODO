@@ -1,0 +1,41 @@
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  {% load static %}
+  <link rel="stylesheet" href="{% static 'register.css' %}">
+  <title>Login</title>
+</head>
+<body>
+  <div class="container">
+    <form action="" method="POST" id="regForm" class="form">
+    {% csrf_token %}
+      <h2>Login Now!</h2>
+      <div class="form-control">
+        <label for="username">Username</label>
+        <input type="text" name="username">
+        <small>Error Message</small>
+      </div>
+      <div class="form-control">
+        <label for="password">Password</label>
+        <input type="password" name="password">
+        <small>Error Message</small>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <center style="margin-bottom: 50px!important"><a href="/register" >Register</a></center>
+    {% if form.errors %}
+        <div class="danger-alert" role="alert">
+            {% for field, error in form.errors.items  %}
+                {{error}}
+            {% endfor %}
+        </div>
+    {% endif %}
+    {% for message in messages  %}
+     <div class="{{message.tags}}-alert" role="alert">
+        {{message}}
+     </div>
+    {% endfor %}
+  </div>
+</body>
+</html>
